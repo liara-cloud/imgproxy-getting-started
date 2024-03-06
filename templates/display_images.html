@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            margin-top: 20px;
+        }
+        .image-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+        .image-item:hover img {
+            transform: scale(1.1);
+        }
+        .copy-button {
+            margin-top: 5px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .copy-button:hover {
+            background-color: #45a049;
+        }
+        .upload-button {
+            margin-top: 20px;
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .upload-button:hover {
+            background-color: #0073a3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uploaded Images</h1>
+    <div class="image-container">
+        {% for image in images %}
+            <div class="image-item" onclick="openModal('{{ image.final_result }}')">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                <button class="copy-button" onclick="copyLink('{{ image.final_result }}')">Copy Link</button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <button class="upload-button" onclick="location.href='/'">Upload Image</button>
+
+    <script>
+        function openModal(imageUrl) {
+            window.open(imageUrl, '_blank');
+        }
+
+        function copyLink(link) {
+            var fullURL = window.location.origin + link;
+            navigator.clipboard.writeText(fullURL)
+                .then(() => alert('Link copied to clipboard'))
+                .catch((error) => console.error('Could not copy link: ', error));
+        }
+    </script>
+</body>
+</html>
