@@ -71,8 +71,7 @@
     <div class="image-container">
         {% for image in images %}
             <div class="image-item" onclick="openModal('{{ image.final_result }}')">
-                <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                <button class="copy-button" onclick="copyLink('{{ image.final_result }}')">Copy Link</button>
+                <img src="{{ image.final_result }}" alt="{{ image.title }}">
             </div>
         {% endfor %}
     </div>
@@ -82,13 +81,6 @@
     <script>
         function openModal(imageUrl) {
             window.open(imageUrl, '_blank');
-        }
-
-        function copyLink(link) {
-            var fullURL = window.location.origin + link;
-            navigator.clipboard.writeText(fullURL)
-                .then(() => alert('Link copied to clipboard'))
-                .catch((error) => console.error('Could not copy link: ', error));
         }
     </script>
 </body>
