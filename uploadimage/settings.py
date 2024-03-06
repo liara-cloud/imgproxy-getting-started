@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 ENDPOINT = os.getenv("ENDPOINT", 'http://127.0.0.1:8000')
-IMGPROXY_URL = os.getenv("IMGPROXY_URL", 'https://imgproxy-app.liara.run')
+IMGPROXY_URL = os.getenv("IMGPROXY_URL", "")
 
 
 
