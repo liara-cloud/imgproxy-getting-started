@@ -5,7 +5,7 @@ git clone https://github.com/liara-cloud/imgproxy-getting-started.git
 ```
 
 ```
-cd imgproxy-getting-started.git
+cd imgproxy-getting-started
 ```
 
 ```
