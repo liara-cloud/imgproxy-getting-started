@@ -1,4 +1,4 @@
-## Installation (locally)
+## Installation (Local)
 
 ```
 git clone https://github.com/liara-cloud/imgproxy-getting-started.git
