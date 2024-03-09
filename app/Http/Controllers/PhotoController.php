@@ -14,8 +14,15 @@ class PhotoController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $imgProxyConf = config('custom.img_proxy_conf');
+        $options = $imgProxyConf['options'];
+        $gravity = $imgProxyConf['gravity'];
+        $signature = $imgProxyConf['signature'];
+
+
         $phototemp = $request->file('photo')->store('public/photos');
-        $photoPath = env('ENDPOINT_URL') . Storage::url($phototemp);
+        $photoPath_ = env('ENDPOINT_URL') . Storage::url($phototemp);
+        $photoPath = env('IMGPROXY_URL') . '/' . $signature . '/' . $options . '/' . $gravity . '/plain/' . $photoPath_;
 
 
         Photo::create([
