@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Photo;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
@@ -13,7 +14,9 @@ class PhotoController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $photoPath = $request->file('photo')->store('public/photos');
+        $phototemp = $request->file('photo')->store('public/photos');
+        $photoPath = env('ENDPOINT_URL') . Storage::url($phototemp);
+
 
         Photo::create([
             'path' => $photoPath,
