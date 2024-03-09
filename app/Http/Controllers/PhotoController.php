@@ -13,7 +13,7 @@ class PhotoController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $photoPath = $request->file('photo')->store('photos');
+        $photoPath = $request->file('photo')->store('public/photos');
 
         Photo::create([
             'path' => $photoPath,

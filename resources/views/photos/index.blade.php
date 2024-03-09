@@ -1,3 +1,3 @@
 @foreach($photos as $photo)
-    <img src="{{ $photo->path}}" alt="Photo">
+    <img src="{{ Storage::url($photo->path) }}" alt="Photo">
 @endforeach
