@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\PhotoController;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
+Route::get('/photos', [PhotoController::class, 'index'])->name('photo.index');
+Route::post('/photos', [PhotoController::class, 'store'])->name('photo.store');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
