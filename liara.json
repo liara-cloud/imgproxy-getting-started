@@ -1,0 +1,12 @@
+{
+    "platform": "laravel",
+    "laravel": {
+      "phpVersion": "8.2"
+    },
+    "disks": [
+        {
+            "name": "data",
+            "mountTo": "/var/www/html/storage/app/public/photos"
+        }
+    ]
+}
