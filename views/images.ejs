@@ -4,11 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uploaded Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .image-item img:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
     <h1>Uploaded Images</h1>
-    <% images.forEach(function(image) { %>
-        <img src="/public/uploads/<%= image %>" alt="<%= image %>">
-    <% }); %>
+    <div class="image-container">
+        <% images.forEach(function(image) { %>
+            <div class="image-item">
+                <img src="/public/uploads/<%= image %>" alt="<%= image %>">
+            </div>
+        <% }); %>
+    </div>
 </body>
 </html>
