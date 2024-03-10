@@ -12,6 +12,18 @@ const storage = multer.diskStorage({
     }
 });
 
+
+const ENDPOINT_URL = process.env.ENDPOINT_URL;
+const IMGPROXY_URL = process.env.IMGPROXY_URL;
+
+const img_proxy_conf = {
+    "signature": "_",
+    "options": "resize:fill:300:400:0",
+    "gravity": "gravity:sm"
+};
+
+const imgproxy_conf = `${IMGPROXY_URL}/${img_proxy_conf.signature}/${img_proxy_conf.options}/${img_proxy_conf.gravity}/plain/`;
+
 const upload = multer({
     storage: storage
 }).single('myImage');
@@ -49,7 +61,16 @@ app.get('/images', (req, res) => {
             return ['.jpg', '.jpeg', '.png', '.gif'].includes(extname.toLowerCase());
         });
 
-        res.render('images', { images: imageFiles });
+        const processedImages = imageFiles.map(image => {
+            const temp = `${ENDPOINT_URL}/public/uploads/${image}`;
+            return `${imgproxy_conf}${temp}`;
+        });
+
+        processedImages.forEach(image => {
+            console.log(image);
+        });
+
+        res.render('images', { images: processedImages });
     });
 });
 
